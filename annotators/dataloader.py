@@ -11,10 +11,7 @@ class Data_Getter:
 
     def get_data(self):
         """
-        Method Name: get_data
         Description: This method reads the data from source.
-        Output: A pandas DataFrame.
-        On Failure: Raise Exception
         """
         try:
             self.data= pd.read_csv(self.training_file) # reading the data file

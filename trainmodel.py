@@ -24,11 +24,12 @@ class trainModel:
             if (is_null_present):
                 data = preprocessor.filling_missing_values(data, cols_with_missing_values)  # missing value imputation
             #encode categorical data
-            #data = preprocessor.encode_categorical_columns(data)
+            data = preprocessor.encode_categorical_columns(data)
+            #encode numerical data
+            data = preprocessor.encode_numerical_columns(data)
 
             # create separate features and labels
             #X,Y=preprocessor.separate_label_feature(data,label_column_name='Response')
-
 
 
 
