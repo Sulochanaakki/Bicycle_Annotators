@@ -1,4 +1,6 @@
 # Bicycle_Annotators
+``TO  clone this repository``
+git colne https://github.com/Sulochanaakki/Bicycle_Annotators.git
 
 ``To create virtual environment``
 
