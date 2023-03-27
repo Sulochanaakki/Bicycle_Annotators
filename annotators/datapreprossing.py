@@ -77,11 +77,14 @@ class Preprocessor:
             self.cat_df = self.data.copy()
             self.cat_df['created_at'] = pd.to_datetime(self.cat_df['created_at'], infer_datetime_format=True)
 
-            self.data = self.cat_df.drop(columns=['gui_type', 'created_at','task_input.image_url',
-                                                  'task_output.cant_solve','task_output.corrupt_data',
-                                                  'root_input.image_url','project_root_node_input_id',
-                                                  'user.vendor_id','loss','user.id','project_node_input_id',
-                                                  'project_node_output_id','img'],axis=1)
+           # self.data = self.cat_df.drop(columns=['gui_type', 'created_at','task_input.image_url',
+            #                                      'task_output.cant_solve','task_output.corrupt_data',
+            #                                      'root_input.image_url','project_root_node_input_id',
+            #                                      'user.vendor_id','loss','user.id','project_node_input_id',
+            #                                      'project_node_output_id','img'],axis=1)
+
+            self.cat_df = self.cat_df(['user.vendor_user_id','workpackage_total_size','task_output.answer',
+                                       'task_output.duration_ms','is_bicycle'], axis=1)
             self.data=self.data.loc[(self.data['task_output.answer']=='yes') | (self.data['task_output.answer'] == 'no')]
             
             return self.data
@@ -124,12 +127,11 @@ class Preprocessor:
         try:
             
             #Scalling the task_output_duration column by using min max scaler
+            
             scaler = MinMaxScaler()
-            #self.data['task_output.duration_ms']=scaler.fit_transform(self.data[['task_output.duration_ms']])
-           # self.data['task_output.duration_ms'] = scaler.fit_transform(self.data['task_output.duration_ms'].values.reshape(-1,1))
-            scaler = MinMaxScaler()
-            #self.data['task_output.duration_ms'] = scaler.fit_transform(self.data['task_output.duration_ms'].values.reshape(-1,1))
-            self.data['task_output.duration_ms'] = scaler.fit_transform([self-data['task_output.duration_ms']])
+            self.data['task_output.duration_ms'] = scaler.fit_transform(self.data['task_output.duration_ms'].values.reshape(-1,1))
+            
+            #self.data['task_output.duration_ms'] = scaler.fit_transform([self-data['task_output.duration_ms']])
         except Exception as e:
             raise Exception()    
 
